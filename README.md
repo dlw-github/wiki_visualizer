@@ -13,7 +13,7 @@ https://www.youtube.com/watch?v=ASm4N6sk12U
 
 _Developed for Harvard University's 'Principles of Big Data Processing' CSCI E-88 Fall 2022_
 
-![Processing Pipeline](](../blob/master/assets/processing_pipeline.png)
+![Processing Pipeline](assets/pipeline.png)
 *Data processing pipeline*
 
 ## Data source
