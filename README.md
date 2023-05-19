@@ -14,6 +14,7 @@ https://www.youtube.com/watch?v=ASm4N6sk12U
 _Developed for Harvard University's 'Principles of Big Data Processing' CSCI E-88 Fall 2022_
 
 ![Processing Pipeline](assets/pipeline.png)
+
 *Data processing pipeline*
 
 ## Data source
@@ -27,11 +28,11 @@ data: {"$schema":"/mediawiki/recentchange/1.0.0","meta":{"uri":"https://commons.
 *Sample event*
 ## Output
 Real-time visualizations in Kibana
-![Kibana visualizations](](../blob/master/assets/kibana_visualizations.png)
+![Kibana visualizations](assets/kibana_visualizations.png)
 *Visualizations in Kibana*
 
 Aggregated historical queries in Spark
-![Kibana visualizations](](../blob/master/assets/spark_aggregations.png)
+![Kibana visualizations](assets/spark_aggregations.png)
 *Historical data aggregated using Spark*
 ## Implementation
 ### Initialize Kafka
@@ -68,10 +69,10 @@ kafka-topics.sh --create \
 Flume/bin/flume-ng agent --conf conf --conf-file /home/ubuntu/Flume/conf/wiki_flume.properties --name agent1
 ```
 
-![Flume agent running](](../blob/master/assets/flume_agent.png)
+![Flume agent running](assets/flume_agent.png)
 *Flume agent running*
 
-![Kakfa topic ingesting Wikistream events](](../blob/master/assets/input_topic.png)
+![Kakfa topic ingesting Wikistream events](assets/kafka_input_topic.png)
 *Kafka topic ingesting raw events*
 
 
@@ -83,7 +84,7 @@ Script parses events in 'input_topic', processes and outputs them to 'output_top
 Python3 kafka_parse.py
 ```
 
-![Kafka output topic with processed events](](../blob/master/assets/input_topic.png)
+![Kafka output topic with processed events](](assets/kafka_output_topic.png)
 *View of Kafka topic with processed events*
 
 ### Start ElasticSearch and Kibana
@@ -96,7 +97,7 @@ docker-compose -f elastic_kibana.yml up
 ### Send events to Elastic Search
 Script creates index, ([wiki\_realtime.py](../blob/master/wiki_realtime.py)), reads events from Kafka [output_topic\_realtime_to_es.py](../blob/master/output_topic_realtime_to_es.py), and sends them to index.
 
-![ES indexing](](../blob/master/assets/ES_index.png)
+![ES indexing](assets/ES_index.png)
 *Events being indexed into Elastic Search*
 
 ```
