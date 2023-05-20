@@ -7,7 +7,7 @@ import uuid
 var = 1
 while var == 1 :
     consumer = KafkaConsumer(bootstrap_servers='localhost:9092', group_id='group1',auto_offset_reset='latest')
-    consumer.subscribe(['test_topic'])
+    consumer.subscribe(['input_topic'])
 
     producer = KafkaProducer(bootstrap_servers='localhost:9092', value_serializer=lambda v: json.dumps(v).encode('utf-8'))
 
