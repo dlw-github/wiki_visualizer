@@ -27,17 +27,10 @@ data: {"$schema":"/mediawiki/recentchange/1.0.0","meta":{"uri":"https://commons.
 ```
 *Sample event*
 ## Output
-Real-time visualizations in Kibana
+Kibana visualizations of data in real time and windowed aggregations of historical data using Spark
+![Kibana visualizations](assets/output.png)
 
-![Kibana visualizations](assets/kibana_visualizations.png)
-
-*Visualizations in Kibana*
-
-Aggregated historical queries in Spark
-
-![Kibana visualizations](assets/spark_aggregations.png)
-
-*Historical data aggregated using Spark*
+*Visualizations in Kibana and Spark job*
 ## Implementation
 ### Initialize Kafka
 
@@ -96,7 +89,7 @@ Python3 kafka_parse.py
 
 ### Start ElasticSearch and Kibana
 
-[elastic_kibana.yml](elastic_kibana.yml) runs Docker file start up Elastic Search and Kibana (see [docker image here](https://hub.docker.com/r/nshou/elasticsearch-kibana/))
+[elastic_kibana.yml](elastic_kibana.yml) runs Docker file start up Elastic Search and Kibana ([see docker image here](https://hub.docker.com/r/nshou/elasticsearch-kibana/))
 
 ```
 docker-compose -f elastic_kibana.yml up 
