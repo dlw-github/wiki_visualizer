@@ -1,17 +1,12 @@
 # WikiStream big data pipeline
 
 ## Summary
-A data processing pipeline that ingests changes to Wikimedia (>1k/second) and combines historical pre-aggregated and real-time data to produce visual analysis.
+A big data pipeline that ingests changes to Wikimedia (>1k/second) and processes real-time data into Elastic Search and Kibana for visualization and aggregates windowed historical data using Spark.
 
-This pipeline combines historical pre-aggregated data (such as count of new pages per domain per time range) with analysis raw real-time data (type 2 pipeline).
-
-**Youtube**
-https://www.youtube.com/watch?v=ASm4N6sk12U
+[A short video walk-through is available here.](https://www.youtube.com/watch?v=ASm4N6sk12U)
 
 
-**Run on an AWS EC2 instance**
-
-_Developed for Harvard University's 'Principles of Big Data Processing' CSCI E-88 Fall 2022_
+_Originally run on an AWS EC2 instance and developed for Harvard University's 'Principles of Big Data Processing' CSCI E-88 Fall 2022_
 
 ![Processing Pipeline](assets/pipeline_reduced.png)
 
