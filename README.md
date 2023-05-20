@@ -18,7 +18,7 @@ _Developed for Harvard University's 'Principles of Big Data Processing' CSCI E-8
 *Data processing pipeline*
 
 ## Data source
-[Wikipedia edit stream.](https://wikitech.wikimedia.org/wiki/Event_Platform/EventStreams) See [example.events](../blob/master/example.events) for more.
+[Wikipedia edit stream.](https://wikitech.wikimedia.org/wiki/Event_Platform/EventStreams) See [example.events](example.events) for more.
 
 ```
 event: message
@@ -28,11 +28,15 @@ data: {"$schema":"/mediawiki/recentchange/1.0.0","meta":{"uri":"https://commons.
 *Sample event*
 ## Output
 Real-time visualizations in Kibana
+
 ![Kibana visualizations](assets/kibana_visualizations.png)
+
 *Visualizations in Kibana*
 
 Aggregated historical queries in Spark
+
 ![Kibana visualizations](assets/spark_aggregations.png)
+
 *Historical data aggregated using Spark*
 ## Implementation
 ### Initialize Kafka
@@ -61,8 +65,8 @@ kafka-topics.sh --create \
 ```
 ### Run Flume agent
 
-1. Script to generate events ([get_wiki_data.py](../blob/master/get_wiki_data.py))
-2. Configure Flume ([wiki_flume.properties](../blob/master/wiki_flume.properties)) to source events and sink to Kafka topic, 'input_topic' 
+1. Script to generate events ([get_wiki_data.py](get_wiki_data.py))
+2. Configure Flume ([wiki_flume.properties](wiki_flume.properties)) to source events and sink to Kafka topic, 'input_topic' 
 3. Run Flume agent
 
 ```
@@ -70,34 +74,38 @@ Flume/bin/flume-ng agent --conf conf --conf-file /home/ubuntu/Flume/conf/wiki_fl
 ```
 
 ![Flume agent running](assets/flume_agent.png)
+
 *Flume agent running*
 
 ![Kakfa topic ingesting Wikistream events](assets/kafka_input_topic.png)
+
 *Kafka topic ingesting raw events*
 
 
 ### Parse Kafka topic
 
-Script parses events in 'input_topic', processes and outputs them to 'output_topic' ([kafka_parse.py](../blob/master/kafka_parse.py))
+Script parses events in 'input_topic', processes and outputs them to 'output_topic' ([kafka_parse.py](kafka_parse.py))
 
 ```
 Python3 kafka_parse.py
 ```
 
 ![Kafka output topic with processed events](](assets/kafka_output_topic.png)
+
 *View of Kafka topic with processed events*
 
 ### Start ElasticSearch and Kibana
 
-Run docker file ([elastic_kibana.yml](../blob/master/elastic_kibana.yml)), [docker image here](https://hub.docker.com/r/nshou/elasticsearch-kibana/))
+Run docker file ([elastic_kibana.yml](elastic_kibana.yml)), [docker image here](https://hub.docker.com/r/nshou/elasticsearch-kibana/))
 
 ```
 docker-compose -f elastic_kibana.yml up 
 ```
 ### Send events to Elastic Search
-Script creates index, ([wiki\_realtime.py](../blob/master/wiki_realtime.py)), reads events from Kafka [output_topic\_realtime_to_es.py](../blob/master/output_topic_realtime_to_es.py), and sends them to index.
+Script creates index, ([wiki\_realtime.py](wiki_realtime.py)), reads events from Kafka [output_topic\_realtime_to_es.py](output_topic_realtime_to_es.py), and sends them to index.
 
 ![ES indexing](assets/ES_index.png)
+
 *Events being indexed into Elastic Search*
 
 ```
@@ -108,7 +116,7 @@ Create visualizations as desired and add to dashboard
 
 ### Process historical data in Spark
 
-1. Spark structured streaming script takes events from Kafka’s 'output\_topic' and performs aggregations (ex. count event’s by domain, by minute ([wiki\_spark\_job.py](../blob/master/wiki_spark_job.py))
+1. Spark structured streaming script takes events from Kafka’s 'output\_topic' and performs aggregations (ex. count event’s by domain, by minute ([wiki\_spark\_job.py](wiki_spark_job.py))
 2. Run Spark job ([see docker image here](https://github.com/godatadriven-dockerhub/pyspark))
 
 ```
