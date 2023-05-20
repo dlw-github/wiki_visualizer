@@ -65,8 +65,8 @@ kafka-topics.sh --create \
 ```
 ### Run Flume agent
 
-1. Script to generate events ([get_wiki_data.py](get_wiki_data.py))
-2. Configure Flume ([wiki_flume.properties](wiki_flume.properties)) to source events and sink to Kafka topic, 'input_topic' 
+1. [get_wiki_data.py](get_wiki_data.py) gets events from Wikistream 
+2. Configure Flume using [wiki_flume.properties](wiki_flume.properties) to source events and sink to Kafka topic, 'input_topic' 
 3. Run Flume agent
 
 ```
@@ -84,25 +84,25 @@ Flume/bin/flume-ng agent --conf conf --conf-file /home/ubuntu/Flume/conf/wiki_fl
 
 ### Parse Kafka topic
 
-Script parses events in 'input_topic', processes and outputs them to 'output_topic' ([kafka_parse.py](kafka_parse.py))
+[kafka_parse.py](kafka_parse.py) parses events in 'input_topic', processes and outputs them to 'output_topic'
 
 ```
 Python3 kafka_parse.py
 ```
 
-![Kafka output topic with processed events](](assets/kafka_output_topic.png)
+![Kafka output topic with processed events](assets/kafka_output_topic.png)
 
 *View of Kafka topic with processed events*
 
 ### Start ElasticSearch and Kibana
 
-Run docker file ([elastic_kibana.yml](elastic_kibana.yml)), [docker image here](https://hub.docker.com/r/nshou/elasticsearch-kibana/))
+[elastic_kibana.yml](elastic_kibana.yml) runs Docker file start up Elastic Search and Kibana (see [docker image here](https://hub.docker.com/r/nshou/elasticsearch-kibana/))
 
 ```
 docker-compose -f elastic_kibana.yml up 
 ```
 ### Send events to Elastic Search
-Script creates index, ([wiki\_realtime.py](wiki_realtime.py)), reads events from Kafka [output_topic\_realtime_to_es.py](output_topic_realtime_to_es.py), and sends them to index.
+[realtime_to_es.py](realtime_to_es.py) reads events from Kafka, and indexes them into Elastic Search.
 
 ![ES indexing](assets/ES_index.png)
 
@@ -116,7 +116,7 @@ Create visualizations as desired and add to dashboard
 
 ### Process historical data in Spark
 
-1. Spark structured streaming script takes events from Kafka’s 'output\_topic' and performs aggregations (ex. count event’s by domain, by minute ([wiki\_spark\_job.py](wiki_spark_job.py))
+1. Spark structured streaming script, [wiki\_spark\_job.py](wiki_spark_job.py), takes events from Kafka’s 'output_topic' and performs aggregations (ex. count event’s by domain, by minute
 2. Run Spark job ([see docker image here](https://github.com/godatadriven-dockerhub/pyspark))
 
 ```
