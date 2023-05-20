@@ -28,7 +28,7 @@ data: {"$schema":"/mediawiki/recentchange/1.0.0","meta":{"uri":"https://commons.
 *Sample event*
 ## Output
 Kibana visualizations of data in real time and windowed aggregations of historical data using Spark
-![Kibana visualizations](assets/output.png)
+![Kibana visualizations](assets/outputs.png)
 
 *Visualizations in Kibana and Spark job*
 ## Implementation
