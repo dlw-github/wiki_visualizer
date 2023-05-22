@@ -112,7 +112,7 @@ docker run -v $(pwd):/job godatadriven/pyspark --packages org.apache.spark:spark
 ```
 
 ## Areas for development
-- Run it across multiple servers
+- Run project across multiple servers
 - Add more visualizations of the real time data in Kibana
 - Store output from Spark in a data storage like HDFS
 - Index output from Spark into ElasticSearch and visualize it in Kibana
